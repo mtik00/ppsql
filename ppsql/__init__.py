@@ -26,9 +26,6 @@ def ppsql(sql, stdout=True):
         In order to keep debugging less noisy, `stdout=TRUE` will **not** return
         the formatted string.
     :returns: the formatted string
-
-    NOTE: This function does not return the formatting string; the formatted
-    string is sent to `STDOUT`.
     """
     if callable(sql):
         # Make the query.  This will return a QuerySet
