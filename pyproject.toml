@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "ppsql"
+version = "0.1.0"
+description = "A package for printing Django ORM SQL-like statements"
+authors = ["Tim McFadden <tim@timandjamie.com>"]
+
+[tool.poetry.dependencies]
+python = "*"
+sqlparse = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
