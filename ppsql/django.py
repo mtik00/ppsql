@@ -4,7 +4,7 @@
 This module adds a short-cut command for printing the SQL-like text for Django queries.
 """
 
-from __future__ import print_function
+from __future__ import absolute_import, print_function
 import sqlparse
 
 
