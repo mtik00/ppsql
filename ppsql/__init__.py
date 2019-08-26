@@ -64,10 +64,14 @@ def sqlalchemy_ppsql(sql, stdout=True, dialect=None):
 
         https://docs.sqlalchemy.org/en/13/dialects/
 
-    As a convenience, the following strings are supported.  You may also pass
-    in the dialect directly.
+    As a convenience, the following strings are supported.
 
         "postgresql", "sqlite", "mysql"
+
+    You may also pass in the dialect directly:
+
+        from sqlalchemy.dialects import firebird
+        print(sqlalchemy_ppsql(q, dialect=firebird.dialect()))
 
     :param * sql: See above
     :param bool stdout: This function will print to STDOUT when True.  NOTE:
