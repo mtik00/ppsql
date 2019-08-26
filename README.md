@@ -6,6 +6,12 @@ This is a simple package that is used to print the SQL-like statement crafted by
 
 This package only relies on [sqlparse](https://pypi.org/project/sqlparse/) and, of course, Django or SQLAlchemy.
 
+# Installation
+
+You can download and install the release wheel.  You can also run this command to install the latest release:  
+
+    pip install https://github.com/mtik00/ppsql/releases/download/v1.0.0/ppsql-1.0.0-py2.py3-none-any.whl
+
 # Sample Usage
 
 See the `examples` folder for Django and SQLAlchemy sample projects.

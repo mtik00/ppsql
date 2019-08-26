@@ -2,6 +2,9 @@
 ###############################################################################
 # This bash script is used to automate GitHub releases using the `hub`
 # command-line tool (https://github.com/github/hub#installation).
+#
+# You can test the status by running `release.sh test`.  This will stop
+# execution just before clearing the build folder.
 ###############################################################################
 ERRORS=0
 
@@ -20,6 +23,8 @@ fi
 # Make sure our versions match
 TOML_VERSION=$(grep -oP 'version = "\K(.*)(?=")' pyproject.toml)
 PACKAGE_VERSION=$(grep -oP '__version__ = "\K(.*)(?=")' ppsql/__init__.py)
+README_VERSION1=$(grep -oP 'download/v\K(.*?)(?=/)' README.md)
+README_VERSION2=$(grep -oP 'ppsql-\K(.*?)(?=-)' README.md)
 
 if [[ "${TOML_VERSION}" != "${PACKAGE_VERSION}" ]]; then
     echo "ERROR: toml and package version mismatch"
@@ -28,8 +33,25 @@ if [[ "${TOML_VERSION}" != "${PACKAGE_VERSION}" ]]; then
     ERRORS=1
 fi
 
+if [[ "${README_VERSION1}" != "${README_VERSION2}" ]]; then
+    echo "ERROR: inconsistent versions in README.md"
+    ERRORS=1
+fi
+
+if [[ "${README_VERSION1}" != "${TOML_VERSION}" ]]; then
+    echo "ERROR: toml and README version mismatch"
+    echo "...README version: ${README_VERSION1}"
+    echo "...  toml version: ${TOML_VERSION}"
+    ERRORS=1
+fi
+
 if [[ ${ERRORS} != 0 ]]; then
     exit 1
+fi
+
+if [[ "${1}" == "test" ]]; then
+    echo "test complete"
+    exit
 fi
 
 # Clear the build folder
