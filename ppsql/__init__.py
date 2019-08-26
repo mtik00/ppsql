@@ -13,6 +13,9 @@ import sqlparse
 __version__ = "0.2.0"
 
 
+DEFAULT_DIALECT = None
+
+
 def django_ppsql(sql, stdout=True):
     """
     Print or return the converted query.
@@ -73,6 +76,9 @@ def sqlalchemy_ppsql(sql, stdout=True, dialect=None):
         from sqlalchemy.dialects import firebird
         print(sqlalchemy_ppsql(q, dialect=firebird.dialect()))
 
+    You may also call `set_default_dialect()` so you don't have too keep passing
+    in this parameter.
+
     :param * sql: See above
     :param bool stdout: This function will print to STDOUT when True.  NOTE:
         In order to keep debugging less noisy, `stdout=TRUE` will **not** return
@@ -82,6 +88,11 @@ def sqlalchemy_ppsql(sql, stdout=True, dialect=None):
     """
     from sqlalchemy.orm.query import Query
     from sqlalchemy.dialects import postgresql, sqlite as sqlite_dialect, mysql
+
+    # Only use the default dialect if it has been set.  Otherwise allow `None`
+    # to fall through.
+    if (dialect is None) and (DEFAULT_DIALECT is not None):
+        dialect = DEFAULT_DIALECT
 
     dialect_map = {
         "postgresql": postgresql.dialect(),
@@ -118,4 +129,16 @@ def sqlalchemy_ppsql(sql, stdout=True, dialect=None):
     return formatted
 
 
+def set_default_dialect(dialect):
+    """
+    Forces all subsequent `sqlalchemy_ppsql()` calls to use the provided
+    dialect.
+
+    You must use `set_default_dialect(None)` to revert this behavior.
+    """
+    global DEFAULT_DIALECT
+    DEFAULT_DIALECT = dialect
+
+
+# Set the default to use Django
 ppsql = django_ppsql

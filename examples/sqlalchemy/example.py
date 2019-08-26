@@ -42,14 +42,16 @@ def create_database():
 
 
 if __name__ == "__main__":
-    from ppsql import sqlalchemy_ppsql as ppsql
+    from ppsql import sqlalchemy_ppsql as ppsql, set_default_dialect
+
+    set_default_dialect("sqlite")
 
     session = create_database()
 
     print("simple filter for 'mary'")
     query = session.query(User).filter(User.name == "mary")
-    ppsql(query, dialect="sqlite")
+    ppsql(query)
 
     print("\n\nfiltering with `in_`")
     query = session.query(User).filter(User.name.in_(("mary", "anne")))
-    ppsql(query, dialect="sqlite")
+    ppsql(query)

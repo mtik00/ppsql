@@ -33,7 +33,7 @@ WHERE "polls_choice"."votes" >= 10
 
 ## SQLAlchemy
 ```python
-In [1]: from ppsql import sqlalchemy_ppsql as ppsql
+In [1]: from ppsql import sqlalchemy_ppsql as ppsql, set_default_dialect
 
 In [2]: session = create_database()
 
@@ -49,7 +49,9 @@ WHERE users.name = 'mary'
 
 In [5]: query = session.query(User).filter(User.name.in_(("mary", "anne")))
 
-In [6]: ppsql(query, dialect="sqlite")
+In [6]: set_default_dialect("sqlite")
+
+In [7]: ppsql(query)
 SELECT users.id,
        users.name,
        users.fullname,
