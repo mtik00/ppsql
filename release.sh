@@ -1,4 +1,8 @@
 #!/bin/bash
+###############################################################################
+# This bash script is used to automate GitHub releases using the `hub`
+# command-line tool (https://github.com/github/hub#installation).
+###############################################################################
 ERRORS=0
 
 # Make sure we're clean

@@ -17,6 +17,13 @@ That should do it.  `pre-commit` yells at you a lot, but that's a good thing.
 
 # releasing
 
+These instructions use the `hub` CLI tool from GitHub.  For that to work properly, you'll need to configure `hub`.  See here: https://hub.github.com/hub.1.html#configuration
+
+## Using the script
+
+    bash release.sh
+
+## Semi-manually
 1.  Build the release:  
     ```
     rm -rf ./dist/* && poetry build \
