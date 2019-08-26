@@ -4,9 +4,11 @@ This is a simple package that is used to print the SQL-like statement crafted by
 
 # Requirements
 
-This package only relies on `sqlparse` and, of course, Django or SQLAlchemy.
+This package only relies on [sqlparse](https://pypi.org/project/sqlparse/) and, of course, Django or SQLAlchemy.
 
 # Sample Usage
+
+See the `examples` folder for Django and SQLAlchemy sample projects.
 
 ## Django
 ```python
