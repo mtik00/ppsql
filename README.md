@@ -1,41 +1,39 @@
 # ppsql
 
-This is a simple package that is used to print the SQL-like statement crafted by Django's ORM.
+This is a simple package that is used to print the SQL-like statement crafted by Django or SQLAlchemy's ORM.
 
 # Requirements
 
-This package only relies on `sqlparse` and, of course, Django.
+This package only relies on `sqlparse` and, of course, Django or SQLAlchemy.
 
 # Sample Usage
 
-You can use any of these methods in order to display the SQL-like query:
+## Django
 
+## SQLAlchemy
 ```python
-from ppsql import ppsql
+In [1]: from ppsql import sqlalchemy_ppsql as ppsql
 
-from my_project.models import User
+In [2]: session = create_database()
 
-ppsql(User.objects.all)
-ppsql(User.objects.all())
-ppsql(User.objects.all().query)
-ppsql(str(User.objects.all().query))
+In [3]: query = session.query(User).filter(User.name == "mary")
 
-print(User.objects.all, stdout=False)
+In [4]: ppsql(query, dialect="sqlite")
+SELECT users.id,
+       users.name,
+       users.fullname,
+       users.nickname
+FROM users
+WHERE users.name = 'mary'
+
+In [5]: query = session.query(User).filter(User.name.in_(("mary", "anne")))
+
+In [6]: ppsql(query, dialect="sqlite")
+SELECT users.id,
+       users.name,
+       users.fullname,
+       users.nickname
+FROM users
+WHERE users.name IN ('mary',
+                     'anne')
 ```
-
-# dev env setup
-
-This project uses `poetry`, `pre-commit`, and optionally `direnv` (for `poetry` python version management).
-
-**NOTE**: You don't need any of this to _use_ `ppsql`.  However, I'd appreciate if you used this environment to submit an PRs.
-
-1.  Change to this folder
-1.  Create and activate a Python3.6+ environment (use `direnv allow .` if you are using `direnv`)
-1.  Install poetry (if you don't have it installed globally):  
-    `pip install poetry`
-1.  Install required packages:  
-    `poetry install`
-1.  Install the `pre-commit` hooks:  
-    `pre-commit install`
-
-That should do it.  `pre-commit` yells at you a lot, but that's a good thing.

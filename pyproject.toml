@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "ppsql"
-version = "0.1.0"
-description = "A package for printing Django ORM SQL-like statements"
+version = "0.2.0"
+description = "A package for printing Django & SQLAlchemy ORM SQL-like statements"
 authors = ["Tim McFadden <tim@timandjamie.com>"]
 
 [tool.poetry.dependencies]
@@ -10,6 +10,7 @@ sqlparse = "*"
 [tool.poetry.dev-dependencies]
 pytest = "*"
 pre-commit = "^1.18"
+flake8 = "^3.7"
 
 [build-system]
 requires = ["poetry>=0.12"]
