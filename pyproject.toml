@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ppsql"
-version = "0.2.0"
+version = "1.0.0"
 description = "A package for printing Django & SQLAlchemy ORM SQL-like statements"
 authors = ["Tim McFadden <tim@timandjamie.com>"]
 

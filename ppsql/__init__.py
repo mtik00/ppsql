@@ -10,7 +10,7 @@ NOTE: The default function, `ppsql`, refers to the Django function.
 from __future__ import print_function
 import sqlparse
 
-__version__ = "0.2.0"
+__version__ = "1.0.0"
 
 
 DEFAULT_DIALECT = None

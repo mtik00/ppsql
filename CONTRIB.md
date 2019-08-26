@@ -14,3 +14,19 @@ This project uses `poetry`, `pre-commit`, and optionally `direnv` (for `poetry` 
     `pre-commit install`
 
 That should do it.  `pre-commit` yells at you a lot, but that's a good thing.
+
+# releasing
+
+1.  Build the release:  
+    ```
+    rm -rf ./dist/* && poetry build \
+    && VERSION=$(grep -oP 'version = "\K(.*)(?=")' pyproject.toml)
+    ```
+2.  Upload the release to GitHub:  
+    ```
+    hub release create \
+    -a dist/ppsql-${VERSION}-py2.py3-none-any.whl \
+    -a dist/ppsql-${VERSION}.tar.gz \
+    -m "Version v${VERSION}" \
+    v${VERSION}
+    ```
