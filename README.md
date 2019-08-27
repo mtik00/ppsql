@@ -17,10 +17,20 @@ You can download and install the release wheel.  You can also run this command t
 See the `examples` folder for Django and SQLAlchemy sample projects.
 
 ## Django
+For Django queries, you can import the function one of two ways:
+```python
+from ppsql import ppsql
+```
+or the Django-specific function:
+```python
+from ppsql import django_ppsql
+```
+
+IPython run for the sample Django app:
 ```python
 In [1]: from polls.models import Question, Choice
 
-In [2]: from ppsql import django_ppsql as ppsql
+In [2]: from ppsql import ppsql
 
 In [3]: ppsql(Question.objects.all())
 SELECT "polls_question"."id",
@@ -38,6 +48,12 @@ WHERE "polls_choice"."votes" >= 10
 ```
 
 ## SQLAlchemy
+For SQLAlchemy queries:
+```python
+from ppsql import sqlalchemy_ppsql as ppsql
+```
+
+IPython run for a sample SQLAlchemy app:
 ```python
 In [1]: from ppsql import sqlalchemy_ppsql as ppsql, set_default_dialect
 
