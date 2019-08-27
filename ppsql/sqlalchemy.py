@@ -2,14 +2,10 @@
 # -*- coding: utf-8 -*-
 """
 This module adds a short-cut command for printing the SQL-like text for SQLAlchemy queries.
-
-NOTE: The default function, `ppsql`, refers to the Django function.
 """
-
 from __future__ import print_function
-import sqlparse
 
-__version__ = "1.0.0"
+from .utils import handle_sql
 
 
 DEFAULT_DIALECT = None
@@ -84,13 +80,7 @@ def ppsql(sql, stdout=True, dialect=None):
         except Exception:
             sql = str(sql.statement.compile(dialect=dialect))
 
-    formatted = sqlparse.format(sql, reindent=True, keyword_case="upper")
-
-    if stdout:
-        print(formatted)
-        return
-
-    return formatted
+    return handle_sql(sql, stdout)
 
 
 def set_default_dialect(dialect):

@@ -3,9 +3,9 @@
 """
 This module adds a short-cut command for printing the SQL-like text for Django queries.
 """
-
 from __future__ import absolute_import, print_function
-import sqlparse
+
+from .utils import handle_sql
 
 
 def ppsql(sql, stdout=True):
@@ -34,10 +34,4 @@ def ppsql(sql, stdout=True):
     elif isinstance(sql, QuerySet):
         sql = str(sql.query)
 
-    formatted = sqlparse.format(sql, reindent=True, keyword_case="upper")
-
-    if stdout:
-        print(formatted)
-        return
-
-    return formatted
+    return handle_sql(sql, stdout)
